@@ -1,0 +1,20 @@
+﻿@{
+    var imagePath = ViewData["BannerPath"];
+    var title = ViewData["Title"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@(title) - MotoGP</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <img src="~/images/banners/@(imagePath)" />
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>

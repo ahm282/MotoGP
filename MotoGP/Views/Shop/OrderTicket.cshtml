@@ -1,0 +1,16 @@
+﻿@{
+    var Title = ViewData["Title"];
+    var Path = ViewData["BannerPath"];
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div>
+    <a asp-controller="Home" asp-action="Index"><img src="@(Path)" alt="Alt text" /></a>
+    <h1>@(Title)</h1>
+</div>
+<div>
+    <p>Please fill out the following fields:</p>
+</div>
+<div>
+    <a asp-controller="Home" asp-action="Menu">Back</a>
+</div>

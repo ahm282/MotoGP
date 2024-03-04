@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoGP", "MotoGP\MotoGP.csproj", "{CC496EBD-81CF-4BE3-86C4-5E0432ADF173}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC496EBD-81CF-4BE3-86C4-5E0432ADF173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC496EBD-81CF-4BE3-86C4-5E0432ADF173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC496EBD-81CF-4BE3-86C4-5E0432ADF173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC496EBD-81CF-4BE3-86C4-5E0432ADF173}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED4E150D-9F6C-4E44-A645-7B31FC2022AA}
+	EndGlobalSection
+EndGlobal

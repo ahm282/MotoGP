@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<style>
+    .menu {
+        max-width: 50%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 2;
+        grid-gap: 10px;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<div>
+    <img src="~/images/banners/banner@(ViewData["RandomNumber"]).jpg" alt="banner"/>
+</div>
+<div class="menu">
+    <a asp-controller="Info" asp-action="ListRaces" asp-route-bannerNr="0"><img src="~/images/banners/races.png" alt="Alternate Text" /></a>
+    <a asp-controller="Info" asp-action="ListRiders" asp-route-bannerNr="1"><img src="~/images/banners/riders.png" alt="Alternate Text" /></a>
+    <a asp-controller="Info" asp-action="ListTeams" asp-route-bannerNr="2"><img src="~/images/banners/teams.png" alt="Alternate Text" /></a>
+    <a asp-controller="Shop" asp-action="OrderTicket" asp-route-bannerNr="3"><img src="~/images/banners/tickets.png" alt="Alternate Text" /></a>
+</div>

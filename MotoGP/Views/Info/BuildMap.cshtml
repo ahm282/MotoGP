@@ -1,0 +1,22 @@
+﻿@{
+    var Title = ViewData["Title"];
+    var Path = ViewData["BannerPath"];
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div>
+    <a asp-controller="Home" asp-action="Index"><img src="@(Path)" alt="Alt text" /></a>
+    <h1>@(Title)</h1>
+</div>
+<div>
+    <img src="~/images/banners/map.png" alt="map" usemap="#raceMap" />
+    <map name="raceMap">
+        @foreach (var race in ViewData["Races"] as List<Race>)
+        {
+            <area shape="circle" coords="@race.X,@race.Y,10" href="@Url.Action("ShowRace", "Info", new {id = race.raceID })" alt="@race.name" />
+        }
+    </map>
+</div>
+<div>
+    <p><a asp-controller="Home" asp-action="Menu">Back</a> | <a asp-controller="Home" asp-action="Menu">Races on map</a> | <a asp-controller="Home" asp-action="Menu">One by one</a></p>
+</div>
