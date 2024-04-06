@@ -1,6 +1,7 @@
 ﻿@{
     var Title = ViewData["Title"];
     var Path = ViewData["BannerPath"];
+    var CurrentDate = ViewData["CurrentDate"];
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 
@@ -9,7 +10,7 @@
     <h1>@(Title)</h1>
 </div>
 <div>
-    <p>Thank you for ordering tickets for the race. Your booking is registered on <strong>16/03/2020</strong>. We will send the tickets as soon as possible.</p>
+    <p>Thank you for ordering tickets for the race. Your booking is registered on <strong>@(CurrentDate)</strong>. We will send the tickets as soon as possible.</p>
 </div>
 <div>
     <a asp-controller="Home" asp-action="Menu">Back</a>

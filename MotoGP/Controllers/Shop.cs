@@ -16,6 +16,7 @@ namespace MotoGP.Controllers
         {
             ViewData["Title"] = "Confirmation";
             ViewData["BannerPath"] = Info.GetImagePath(3);
+            ViewData["CurrentDate"] = DateTime.Now.ToString("dd/MM/yyyy");
 
             return View();
         }
