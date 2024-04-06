@@ -14,6 +14,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+// Register the GPContext with the DI container
+builder.Services.AddDbContext<GPContext>(options =>
+    options.UseSqlServer(connectionString));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,5 +43,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope())
+{
+    var gpContext = scope.ServiceProvider.GetRequiredService<GPContext>();
+    DBInitializer.Initialize(gpContext);
+}
 
 app.Run();

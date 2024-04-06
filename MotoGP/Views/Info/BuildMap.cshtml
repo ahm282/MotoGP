@@ -13,7 +13,7 @@
     <map name="raceMap">
         @foreach (var race in ViewData["Races"] as List<Race>)
         {
-            <area shape="circle" coords="@race.X,@race.Y,10" href="@Url.Action("ShowRace", "Info", new {id = race.raceID })" alt="@race.name" />
+            <area shape="circle" coords="@race.X,@race.Y,10" href="@Url.Action("ShowRace", "Info", new {id = race.RaceID })" alt="@race.Name" />
         }
     </map>
 </div>

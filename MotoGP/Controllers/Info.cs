@@ -45,13 +45,13 @@ namespace MotoGP.Controllers
         public IActionResult BuildMap()
         {
             List<Race> races = new List<Race>();
-            Race Assen = new(1, "Assen", 517, 19);
-            Race Losail = new(2, "Losail Circuit", 859, 249);
-            Race Rio = new(3, "Autódromo Termas de Río Hondo", 194, 428);
+            //Race Assen = new(1, "Assen", 517, 19);
+            //Race Losail = new(2, "Losail Circuit", 859, 249);
+            //Race Rio = new(3, "Autódromo Termas de Río Hondo", 194, 428);
             
-            races.Add(Assen);
-            races.Add(Losail);
-            races.Add(Rio);
+            //races.Add(Assen);
+            //races.Add(Losail);
+            //races.Add(Rio);
 
             ViewData["Races"] = races;
             ViewData["BannerPath"] = GetImagePath(0);
