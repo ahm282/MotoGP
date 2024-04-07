@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Riders";
+    var Path = ViewData["BannerPath"];
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<div>
+    <img src="@(Path)" alt="banner" />
+    <h1>@(ViewData["Title"])</h1>
+</div>
+<div>
+    @foreach(Rider rider in Model)
+    {
+        <div class="card">
+            <img src="/images/riders/@(rider.Number).jpg" alt="photo" />
+            <img src="/images/flags/@(rider.CountryID).png" alt="flag" />
+            <p><span>@rider.Number</span> <span><a asp-controller="Info" asp-action="ShowRider" asp-route-id="@rider.RiderID">@rider.FirstName @rider.LastName</a></span></p>
+        </div>
+    }
+</div>

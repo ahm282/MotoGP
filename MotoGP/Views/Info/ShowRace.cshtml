@@ -1,0 +1,17 @@
+﻿@model MotoGP.Models.Race
+@{
+    ViewData["Title"] = "Race - " + Model.Name;
+    var Path = ViewData["BannerPath"];
+    var circuitMap = "/images/races/" + @Model.RaceID + ".jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div>
+    <img src="@(Path)" alt="banner" />
+    <h1>@(ViewData["Title"])</h1>
+</div>
+<div>
+    <h2>@Model.Date.ToShortDateString() - @Model.Country</h2>
+    <img src="@(circuitMap)" alt="Circuit map"/>
+    <p>@Model.Description</p>
+</div>

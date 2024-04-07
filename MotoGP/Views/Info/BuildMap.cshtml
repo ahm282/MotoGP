@@ -3,6 +3,7 @@
     var Path = ViewData["BannerPath"];
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
+@model IEnumerable<MotoGP.Models.Race>
 
 <div>
     <a asp-controller="Home" asp-action="Index"><img src="@(Path)" alt="Alt text" /></a>
@@ -11,9 +12,9 @@
 <div>
     <img src="~/images/banners/map.png" alt="map" usemap="#raceMap" />
     <map name="raceMap">
-        @foreach (var race in ViewData["Races"] as List<Race>)
+        @foreach (Race race in Model)
         {
-            <area shape="circle" coords="@race.X,@race.Y,10" href="@Url.Action("ShowRace", "Info", new {id = race.RaceID })" alt="@race.Name" />
+            <area shape="circle" coords="@race.X,@race.Y,10" href="@Url.Action("showrace", "info", new {id = race.RaceID})" alt="@race.Name" />
         }
     </map>
 </div>

@@ -1,10 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MotoGP.Models;
+using MotoGP.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MotoGP.Controllers
 {
     public class Info : Controller
     {
+        private readonly GPContext _context;
+
+        public Info(GPContext context)
+        {
+            _context = context;
+        }
+
         public static string GetImagePath(int bannerID)
         {
             var banners = new List<String>
@@ -38,26 +47,46 @@ namespace MotoGP.Controllers
         {
             ViewData["BannerPath"] = GetImagePath(bannerID);
             ViewData["Title"] = "List Races";
+            var races = _context.Races.OrderBy(r => r.Date);
 
-            return View();
+            return View(races.ToList());
         }
 
         public IActionResult BuildMap()
         {
-            List<Race> races = new List<Race>();
-            //Race Assen = new(1, "Assen", 517, 19);
-            //Race Losail = new(2, "Losail Circuit", 859, 249);
-            //Race Rio = new(3, "Autódromo Termas de Río Hondo", 194, 428);
-            
-            //races.Add(Assen);
-            //races.Add(Losail);
-            //races.Add(Rio);
-
-            ViewData["Races"] = races;
             ViewData["BannerPath"] = GetImagePath(0);
             ViewData["Title"] = "Races on map";
+            var races = _context.Races.OrderBy(r => r.Name);
 
-            return View();
+            return View(races.ToList());
+        }
+
+        public IActionResult ShowRace(int id)
+        {
+            Race selectedRace = _context.Races.SingleOrDefault(r => r.RaceID == id);
+            Console.WriteLine("SelectedRace: " + id);
+
+            if (selectedRace != null)
+            {
+                Console.WriteLine("SelectedRace: " + id);
+                ViewData["BannerPath"] = GetImagePath(0);
+                return View(selectedRace);
+            }
+            else
+            {
+                // Handle case where race with specified raceID is not found
+                // For example, redirect to an error page or display a message to the user
+                return NotFound();
+            }
+        }
+
+        public IActionResult ListRiders()
+        {
+            ViewData["BannerPath"] = GetImagePath(1);
+            ViewData["Title"] = "List Riders";
+            var riders = _context.Riders.OrderBy(r => r.Number);
+
+            return View(riders.ToList());
         }
     }
 }

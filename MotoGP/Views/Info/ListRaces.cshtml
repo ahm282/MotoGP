@@ -1,12 +1,30 @@
 ﻿@{
     var Title = ViewData["Title"];
     var Path = ViewData["BannerPath"];
+    string currentMonth = "";
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 
 <div>
-    <a asp-controller="Home" asp-action="Index"><img src="@(Path)" alt="Alt text" /></a>
+    <img src="@(Path)" alt="banner" />
     <h1>@(Title)</h1>
+</div>
+<div>
+    @foreach(Race race in Model)
+    {
+        string raceMonth = race.Date.ToString("MMMM");
+
+        if (raceMonth != currentMonth)
+        {
+            <h2>@raceMonth</h2>
+            currentMonth = raceMonth;
+        }
+
+        <div>
+            <p><span>@race.Date.ToShortDateString()</span> <span><a href="@Url.Action("ShowRace", "info", new { id = race.RaceID })">@race.Name</a></span></p>
+            @* <p><span>@race.Date.ToShortDateString()</span> <span><a asp-controller="Info" asp-action="ShowRace" asp-route-id="@race.RaceID" >@race.Name</a></span></p> *@
+        </div>
+    }
 </div>
 <div>
     <p><a asp-controller="Home" asp-action="Menu">Back</a> | <a asp-controller="Info" asp-action="BuildMap">Races on map</a> | <a asp-controller="Home" asp-action="Menu">One by one</a></p>
