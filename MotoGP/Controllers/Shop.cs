@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MotoGP.Data;
 using MotoGP.Models;
+using MotoGP.Models.ViewModels;
 
 namespace MotoGP.Controllers
 {
@@ -59,6 +60,32 @@ namespace MotoGP.Controllers
             }
 
             return View(ticket);
+        }
+
+        public IActionResult ListTickets(int raceID = 0)
+        {
+            ViewData["Title"] = "Tickets";
+            ViewData["BannerPath"] = Info.GetImagePath(3);
+
+            var races = _context.Races.OrderBy(r => r.Name).ToList();
+
+            var ListTicketsVM= new ListTicketsViewModel();
+            ListTicketsVM.RacesSelectList = new SelectList(races, "RaceID", "Name");
+
+            if (raceID != 0)
+            {
+                ListTicketsVM.SelectedRace = _context.Races.Where(r => r.RaceID == raceID).First();
+                var tickets = _context.Tickets.OrderBy(t => t.OrderDate).Where(t => t.RaceID == raceID).ToList();
+                ListTicketsVM.Tickets = tickets;
+            }
+            else
+            {
+                ListTicketsVM.SelectedRace = _context.Races.OrderBy(r => r.RaceID).First();
+                var tickets = _context.Tickets.OrderBy(t => t.OrderDate).ToList();
+                ListTicketsVM.Tickets = tickets;
+            }
+
+            return View(ListTicketsVM);
         }
 
         public IActionResult Index()

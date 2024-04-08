@@ -1,0 +1,59 @@
+﻿@model MotoGP.Models.ViewModels.ListTicketsViewModel
+
+@{
+    var Title = ViewData["Title"];
+    var Path = ViewData["BannerPath"];
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div>
+    <img src="@(Path)" alt="banner" />
+    <h1>@(Title)</h1>
+</div>
+
+<div>
+    <form asp-controller="Shop" asp-action="ListTickets" id="ticketsForm">
+        <select asp-for="RaceID" asp-items="Model.RacesSelectList" onchange="submitForm()">
+            <option value="0">-- Select a race --</option>
+        </select>
+    </form>
+</div>
+
+@if (Model.Tickets.Count > 0)
+{
+    <table style="margin-top: 2em; margin-bottom: 2em;">
+        <tr>
+            <th>OrderDate</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Country</th>
+            <th>Race</th>
+            <th>Number</th>
+        </tr>
+        @foreach (var item in Model.Tickets)
+        {
+            <tr>
+                <td>@(item.OrderDate.ToString("dd/MM/yyyy"))</td>
+                <td>@(item.Name)</td>
+                <td>@(item.Email)</td>
+                <td>@(item.Address)</td>
+                <td>@(item.Race.Country)</td>
+                <td>@(item.Race.Name)</td>
+                <td>@(item.Number)</td>
+            </tr>
+        }
+    </table>
+} else {
+    <p>No tickets ordered for this race yet.</p>
+}
+
+<div style="margin-top: 1em;">
+    <a asp-controller="Home" asp-action="Menu">Back</a>
+</div>
+
+<script>
+    function submitForm() {
+        document.getElementById("ticketsForm").submit();
+    }
+</script>

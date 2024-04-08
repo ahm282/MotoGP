@@ -1,0 +1,44 @@
+﻿@model MotoGP.Models.ViewModels.SelectRaceViewModel
+
+@{
+    var Title = ViewData["Title"];
+    var Path = ViewData["BannerPath"];
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div>
+    <img src="@(Path)" alt="banner" />
+    <h1>@(Title)</h1>
+</div>
+
+<div>
+    <form asp-controller="Info" asp-action="SelectRace" method="get" id="raceForm">
+        <select asp-for="RaceId" asp-items="Model.RacesSelectList" onchange="submitForm()">
+            <option value="0">-- Select a rating --</option>
+        </select>
+    </form>
+</div>
+
+<div style="margin-top: 4em; display: flex;">
+    <div style="margin-right: 4em; margin-left: 0.3em;">
+        <img src="~/images/races/@(Model.SelectedRace.RaceID).jpg" />
+    </div>
+    <div>
+        <p>@(Model.SelectedRace.Name) - @(Model.SelectedRace.Country)</p>
+        <p>Length: @(Model.SelectedRace.Length)m</p>
+        <p>Date: @(Model.SelectedRace.Date.ToShortDateString())</p>
+        <div style="margin-top: 2em;">
+            <p style="width: 50%; text-align:justify;">@(Model.SelectedRace.Description)</p>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 1em;">
+    <a asp-controller="Info" asp-action="ListRaces">Back</a>
+</div>
+
+<script>
+    function submitForm() {
+        document.getElementById("raceForm").submit();
+    }
+</script>
