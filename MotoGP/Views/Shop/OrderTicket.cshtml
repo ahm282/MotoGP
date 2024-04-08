@@ -1,8 +1,11 @@
 ﻿@{
     var Title = ViewData["Title"];
     var Path = ViewData["BannerPath"];
+    var countries = (IEnumerable<SelectListItem>)ViewData["Countries"]!;
+    var races = (IEnumerable<SelectListItem>)ViewData["Races"]!;
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
+@model MotoGP.Models.Ticket
 
 <div>
     <a asp-controller="Home" asp-action="Index"><img src="@(Path)" alt="Alt text" /></a>
@@ -10,6 +13,50 @@
 </div>
 <div>
     <p>Please fill out the following fields:</p>
+    <form asp-action="Create">
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" />
+        <br />
+        <br />
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email" />
+        <br />
+        <br />
+        <label asp-for="Address">Address:</label>
+        <input asp-for="Address" />
+
+        <br />
+        <br />
+        <label asp-for="Country">
+            @Html.DisplayNameFor(model => model.Country)
+        </label>
+        <select asp-for="CountryID" asp-items="countries"></select>
+
+        <br />
+        <br />
+        <label asp-for="Race">
+            @Html.DisplayNameFor(model => model.Race)
+        </label>
+        <select asp-for="RaceID" asp-items="races"></select>
+
+        <br />
+        <br />
+        <label>Number of Tickets:</label>
+        
+        @for (int i = 1; i <= 6; i++)
+        {
+            <label>@i</label>
+            <input asp-for="Number" type="radio" value="@i" />
+        }
+
+        <br />
+        <br />
+        
+        <input type="submit" value="Order" />
+
+        <br />
+        <br />
+    </form>
 </div>
 <div>
     <a asp-controller="Home" asp-action="Menu">Back</a>

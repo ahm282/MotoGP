@@ -1,7 +1,10 @@
-﻿@{
+﻿@model MotoGP.Models.Ticket
+@{
     var Title = ViewData["Title"];
     var Path = ViewData["BannerPath"];
     var CurrentDate = ViewData["CurrentDate"];
+    var formattedDate = Model.OrderDate.ToString("dd/MM/yyyy");
+    var raceFormattedDate = Model.Race.Date.ToString("dd/MM/yyyy");
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 
@@ -10,7 +13,7 @@
     <h1>@(Title)</h1>
 </div>
 <div>
-    <p>Thank you for ordering tickets for the race. Your booking is registered on <strong>@(CurrentDate)</strong>. We will send the tickets as soon as possible.</p>
+    <p>Thank you <strong>@(Html.DisplayFor(model => model.Name))</strong> for ordering tickets for the race in <strong>@(Html.DisplayFor(model => model.Race.Name))</strong> on <strong>@(raceFormattedDate)</strong>. Your booking is registered on <strong>@(formattedDate)</strong>. We will send the <strong>@(Html.DisplayFor(model => model.Number))</strong> tickets as soon as possible.</p>
 </div>
 <div>
     <a asp-controller="Home" asp-action="Menu">Back</a>

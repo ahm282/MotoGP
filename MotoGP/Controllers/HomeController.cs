@@ -20,7 +20,7 @@ namespace MotoGP.Controllers
 
         public IActionResult Menu() {
             // Generate random number between 1 and 4 (inclusive)
-            Random rnd = new Random();
+            Random rnd = new();
             int randomNumber = rnd.Next(1, 5);
             ViewData["RandomNumber"] = randomNumber;
             return View();
