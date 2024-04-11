@@ -1,0 +1,27 @@
+﻿@{
+    var Title = ViewData["Title"];
+    var Path = ViewData["BannerPath"];
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+@model MotoGP.Models.ViewModels.EditTicketViewModel
+
+<div>
+    <a asp-controller="Home" asp-action="Index"><img src="@(Path)" alt="Alt text" /></a>
+    <h1>@(Title)</h1>
+</div>
+<form asp-controller="Shop" asp-action="RegisterPayment" method="post">
+    <input type="hidden" name="id" value="@Model.Ticket.TicketID">
+    <p>Name: @(Model.Ticket.Name)</p>
+    <p>Email: @(Model.Ticket.Email)</p>
+    <p>Address: @(Model.Ticket.Address)</p>
+    <p>Country: @(Model.Race?.Country)</p> <!-- Access Race from EditTicketViewModel -->
+    <p>Number: @(Model.Ticket.Number)</p>
+    <label for="paid">Paid?</label>
+    <input type="checkbox" id="paid" name="paid" value="true">
+    <br />
+    <br />
+    <button type="submit">Register</button>
+</form>
+<div>
+    <a asp-controller="Home" asp-action="Menu">Back</a>
+</div>

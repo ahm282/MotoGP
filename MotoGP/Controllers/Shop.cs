@@ -69,7 +69,7 @@ namespace MotoGP.Controllers
 
             var races = _context.Races.OrderBy(r => r.Name).ToList();
 
-            var ListTicketsVM= new ListTicketsViewModel();
+            var ListTicketsVM = new ListTicketsViewModel();
             ListTicketsVM.RacesSelectList = new SelectList(races, "RaceID", "Name");
 
             if (raceID != 0)
@@ -86,6 +86,43 @@ namespace MotoGP.Controllers
             }
 
             return View(ListTicketsVM);
+        }
+
+        public IActionResult EditTicket(int id)
+        {
+            ViewData["Title"] = "Edit Ticket";
+            ViewData["BannerPath"] = Info.GetImagePath(3);
+
+            var ticket = _context.Tickets.Find(id);
+
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            var race = _context.Races.Find(ticket.RaceID);
+
+            EditTicketViewModel EditTicketVM = new EditTicketViewModel();
+            EditTicketVM.Ticket = ticket;
+            EditTicketVM.Race = race;
+
+            return View(EditTicketVM);
+        }
+
+        [HttpPost]
+        public IActionResult RegisterPayment(int id, bool paid)
+        {
+            var ticket = _context.Tickets.Find(id);
+
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            ticket.Paid = paid;
+            _context.SaveChanges();
+
+            return RedirectToAction("ListTickets");
         }
 
         public IActionResult Index()

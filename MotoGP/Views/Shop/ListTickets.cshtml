@@ -41,6 +41,17 @@
                 <td>@(item.Race.Country)</td>
                 <td>@(item.Race.Name)</td>
                 <td>@(item.Number)</td>
+                @if (item.Paid == true)
+                {
+                    <td>
+                        <span>Paid</span>
+                    </td>
+                } else
+                {
+                    <td>
+                        <a asp-controller="Shop" asp-action="EditTicket" asp-route-id="@item.TicketID">Pay</a>
+                    </td>
+                }
             </tr>
         }
     </table>
